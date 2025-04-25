@@ -5,6 +5,7 @@
 
 package controller;
 
+import dao.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,13 +13,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Account;
+import model.User;
 
 /**
  *
- * @author Nguyen Duc Anh
+ * @author Đông
  */
-@WebServlet(name="VNpayReturnControl", urlPatterns={"/VNpayReturn"})
-public class VNpayReturnControl extends HttpServlet {
+@WebServlet(name = "LoadEditProfile", urlPatterns = {"/loadeditprofile"})
+public class LoadEditProfile extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -32,15 +36,16 @@ public class VNpayReturnControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet VNpayReturnControl</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet VNpayReturnControl at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            HttpSession session = request.getSession();
+            Account a = (Account) session.getAttribute("acc");
+            int id = a.getId();
+            DAO dao = new DAO();
+
+            User u = dao.getUserById(id);
+            if(u!=null){
+                request.setAttribute("U", u);  
+            }
+            request.getRequestDispatcher("editProfile.jsp").forward(request, response);
         }
     } 
 
@@ -55,16 +60,7 @@ public class VNpayReturnControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String responseCode = request.getParameter("vnp_ResponseCode");
-        String orderId = request.getParameter("vnp_TxnRef");
-        String amount = request.getParameter("vnp_Amount");
-
-        request.setAttribute("orderId", orderId);
-        request.setAttribute("amount", amount);
-        request.setAttribute("status", "00".equals(responseCode) ? "Thành công" : "Thất bại");
-
-        request.getRequestDispatcher("index.jsp").forward(request, response);
-    
+        processRequest(request, response);
     } 
 
     /** 

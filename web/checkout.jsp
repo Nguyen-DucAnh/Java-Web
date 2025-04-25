@@ -188,12 +188,6 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" name="payment" id="paypal">
-                                    <label class="custom-control-label" for="paypal">Paypal</label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="custom-control custom-radio">
                                     <input type="radio" class="custom-control-input" name="payment" id="payonpickup">
                                     <label class="custom-control-label" for="payonpickup">Pay on Pickup</label>
                                 </div>
@@ -221,7 +215,6 @@
                             </form>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

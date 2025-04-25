@@ -14,13 +14,13 @@ public class Order {
     private int uid;
     private String fullname;
     private String date;
-    private int statusID;
+    private OrderStatus statusID;
     private double totalmoney;
 
     public Order() {
     }
 
-    public Order(int id, int uid, String fullname, String date, int statusID, double totalmoney) {
+    public Order(int id, int uid, String fullname, String date, OrderStatus statusID, double totalmoney) {
         this.id = id;
         this.uid = uid;
         this.fullname = fullname;
@@ -61,11 +61,11 @@ public class Order {
         this.date = date;
     }
 
-    public int getStatusID() {
+    public OrderStatus getStatusID() {
         return statusID;
     }
 
-    public void setStatusID(int statusID) {
+    public void setStatusID(OrderStatus statusID) {
         this.statusID = statusID;
     }
 

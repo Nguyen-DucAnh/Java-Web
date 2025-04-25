@@ -7,6 +7,10 @@ package dao;
 import java.util.List;
 import model.Account;
 import model.Category;
+import model.Contact;
+import model.Order;
+import model.OrderDetail;
+import model.OrderStatus;
 import model.Product;
 
 /**
@@ -17,10 +21,10 @@ public class Main {
 
     public static void main(String[] args) {
         DAO dao = new DAO();
-        int id = 4;
-
-        List<Product> list = dao.getProductBySellID(id);
-        System.out.println(list.toString());
+        List<Product> list = dao.pagingProduct(2);
+        for (Product p : list) {
+            System.out.println(p.toString());
+        }
     }
 
 }

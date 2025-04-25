@@ -15,16 +15,20 @@ public class OrderDetail {
     private int pid;
     private double price;
     private int num;
+    private String pname;
+    private String usename;
 
     public OrderDetail() {
     }
 
-    public OrderDetail(int id, int orderId, int pid, double price, int num) {
+    public OrderDetail(int id, int orderId, int pid, double price, int num, String pname, String usename) {
         this.id = id;
         this.orderId = orderId;
         this.pid = pid;
         this.price = price;
         this.num = num;
+        this.pname = pname;
+        this.usename = usename;
     }
 
     public int getId() {
@@ -67,10 +71,25 @@ public class OrderDetail {
         this.num = num;
     }
 
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
+    }
+
+    public String getUsename() {
+        return usename;
+    }
+
+    public void setUsename(String usename) {
+        this.usename = usename;
+    }
+
     @Override
     public String toString() {
-        return "OrderDetail{" + "id=" + id + ", orderId=" + orderId + ", pid=" + pid + ", price=" + price + ", num=" + num + '}';
+        return "OrderDetail{" + "id=" + id + ", orderId=" + orderId + ", pid=" + pid + ", price=" + price + ", num=" + num + ", pname=" + pname + ", usename=" + usename + '}';
     }
-    
     
 }

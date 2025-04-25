@@ -29,9 +29,9 @@
                 <div class="col-lg-3 col-6 text-right">
                     <a href="" class="btn border">
                         <i class="fas fa-heart text-primary"></i>
-                        <span class="badge">0</span>
+                        <span class="badge">10</span>
                     </a>
-                    <a href="" class="btn border">
+                    <a href="orderstatus" class="btn border">
                         <i class="fas fa-shopping-cart text-primary"></i>
                         <span class="badge">0</span>
                     </a>

@@ -35,68 +35,68 @@
 
     <body>
         <jsp:include page="header.jsp"></jsp:include>
-        <!-- Navbar Start -->
-        <div class="container-fluid">
-            <div class="row border-top px-xl-5">
-                <div class="col-lg-3 d-none d-lg-block">
-                    <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
-                        <h6 class="m-0">Categories</h6>
-                        <i class="fa fa-angle-down text-dark"></i>
-                    </a>
-                    <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
-                        <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link" data-toggle="dropdown">Dresses <i class="fa fa-angle-down float-right mt-1"></i></a>
-                                <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                    <a href="" class="dropdown-item">Men's Dresses</a>
-                                    <a href="" class="dropdown-item">Women's Dresses</a>
-                                    <a href="" class="dropdown-item">Baby's Dresses</a>
-                                </div>
-                            </div>
-                            <a href="" class="nav-item nav-link">Shirts</a>
-                            <a href="" class="nav-item nav-link">Jeans</a>
-                            <a href="" class="nav-item nav-link">Swimwear</a>
-                            <a href="" class="nav-item nav-link">Sleepwear</a>
-                            <a href="" class="nav-item nav-link">Sportswear</a>
-                            <a href="" class="nav-item nav-link">Jumpsuits</a>
-                            <a href="" class="nav-item nav-link">Blazers</a>
-                            <a href="" class="nav-item nav-link">Jackets</a>
-                            <a href="" class="nav-item nav-link">Shoes</a>
-                        </div>
-                    </nav>
-                </div>
-                <div class="col-lg-9">
-                    <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-                        <a href="" class="text-decoration-none d-block d-lg-none">
-                            <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
+            <!--         Navbar Start -->
+            <div class="container-fluid">
+                <div class="row border-top px-xl-5">
+                    <div class="col-lg-3 d-none d-lg-block">
+                        <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
+                            <h6 class="m-0">Categories</h6>
+                            <i class="fa fa-angle-down text-dark"></i>
                         </a>
-                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                            <div class="navbar-nav mr-auto py-0">
-                                <a href="home" class="nav-item nav-link">Home</a>
-                                <a href="shop" class="nav-item nav-link">Shop</a>
+                        <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
+                            <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
                                 <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                                    <div class="dropdown-menu rounded-0 m-0">
-                                        <a href="cart" class="dropdown-item">Shopping Cart</a>
-                                        <a href="checkout" class="dropdown-item">Checkout</a>
+                                    <a href="#" class="nav-link" data-toggle="dropdown">Dresses <i class="fa fa-angle-down float-right mt-1"></i></a>
+                                    <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
+                                        <a href="" class="dropdown-item">Men's Dresses</a>
+                                        <a href="" class="dropdown-item">Women's Dresses</a>
+                                        <a href="" class="dropdown-item">Baby's Dresses</a>
                                     </div>
                                 </div>
-                                <a href="contact" class="nav-item nav-link active">Contact</a>
+                                <a href="" class="nav-item nav-link">Shirts</a>
+                                <a href="" class="nav-item nav-link">Jeans</a>
+                                <a href="" class="nav-item nav-link">Swimwear</a>
+                                <a href="" class="nav-item nav-link">Sleepwear</a>
+                                <a href="" class="nav-item nav-link">Sportswear</a>
+                                <a href="" class="nav-item nav-link">Jumpsuits</a>
+                                <a href="" class="nav-item nav-link">Blazers</a>
+                                <a href="" class="nav-item nav-link">Jackets</a>
+                                <a href="" class="nav-item nav-link">Shoes</a>
                             </div>
+                        </nav>
+                    </div>
+                    <div class="col-lg-9">
+                        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                            <a href="" class="text-decoration-none d-block d-lg-none">
+                                <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
+                            </a>
+                            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                                <div class="navbar-nav mr-auto py-0">
+                                    <a href="home" class="nav-item nav-link">Home</a>
+                                    <a href="shop" class="nav-item nav-link">Shop</a>
+                                    <div class="nav-item dropdown">
+                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                                        <div class="dropdown-menu rounded-0 m-0">
+                                            <a href="cart" class="dropdown-item">Shopping Cart</a>
+                                            <a href="checkout" class="dropdown-item">Checkout</a>
+                                        </div>
+                                    </div>
+                                    <a href="contact" class="nav-item nav-link active">Contact</a>
+                                </div>
                             <c:if test="${sessionScope.acc == null}">
-                            <div class="navbar-nav ml-auto py-0">
-                                <a href="" class="nav-item nav-link">Login</a>
-                            </div>
+                                <div class="navbar-nav ml-auto py-0">
+                                    <a href="" class="nav-item nav-link">Login</a>
+                                </div>
                             </c:if>
                         </div>
                     </nav>
                 </div>
             </div>
         </div>
-        <!-- Navbar End -->
+        <!--         Navbar End -->
 
 
         <!-- Page Header Start -->
@@ -122,49 +122,54 @@
                 <div class="col-lg-7 mb-5">
                     <div class="contact-form">
                         <div id="success"></div>
-                        <form name="sentMessage" id="contactForm" novalidate="novalidate">
-                            <div class="control-group">
-                                <input type="text" class="form-control" id="name" placeholder="Your Name"
-                                       required="required" data-validation-required-message="Please enter your name" />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="control-group">
-                                <input type="email" class="form-control" id="email" placeholder="Your Email"
-                                       required="required" data-validation-required-message="Please enter your email" />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="control-group">
-                                <input type="text" class="form-control" id="subject" placeholder="Subject"
-                                       required="required" data-validation-required-message="Please enter a subject" />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="control-group">
-                                <textarea class="form-control" rows="6" id="message" placeholder="Message"
-                                          required="required"
-                                          data-validation-required-message="Please enter your message"></textarea>
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div>
-                                <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Send
-                                    Message</button>
-                            </div>
+                        <form action="contact" method="post" novalidate="novalidate">
+                        <div class="control-group">
+                            <input type="text" class="form-control" name="name" placeholder="Your Name"
+                                   required data-validation-required-message="Please enter your name" />
+                            <p style="color: red">${mes}</p>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="email" class="form-control" name="email" placeholder="Your Email"
+                                   required data-validation-required-message="Please enter your email" />
+                             <p style="color: red">${mes}</p>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="text" class="form-control" name="subject" placeholder="Subject"
+                                   required data-validation-required-message="Please enter a subject" />
+                             <p style="color: red">${mes}</p>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <textarea class="form-control" rows="6" name="mes" placeholder="Message"
+                                      required data-validation-required-message="Please enter your message"></textarea>
+                             <p style="color: red">${mes}</p>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div>
+                            <p style="color: green">${mess}</p>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Send Message</button>
+                        </div>
                         </form>
                     </div>
                 </div>
                 <div class="col-lg-5 mb-5">
-                    <h5 class="font-weight-semi-bold mb-3">Get In Touch</h5>
-                    <p>Justo sed diam ut sed amet duo amet lorem amet stet sea ipsum, sed duo amet et. Est elitr dolor elitr erat sit sit. Dolor diam et erat clita ipsum justo sed.</p>
+                    <h5 class="font-weight-semi-bold mb-3">About us</h5>
+                    <p>ABC</p>
                     <div class="d-flex flex-column mb-3">
                         <h5 class="font-weight-semi-bold mb-3">Store 1</h5>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
-                        <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
-                        <p class="mb-2"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Thạch Thất,Hà Nội</p>
+                        <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>donglvhe181461@fpt.edu.vn</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt text-primary mr-3"></i>0329779959</p>
                     </div>
                     <div class="d-flex flex-column">
                         <h5 class="font-weight-semi-bold mb-3">Store 2</h5>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
-                        <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
-                        <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Thạch Thất,Hà Nội</p>
+                        <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>ducanh@gmail.com</p>
+                        <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>1234564321</p>
                     </div>
                 </div>
             </div>

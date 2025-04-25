@@ -1,7 +1,7 @@
 <%-- 
-    Document   : account
-    Created on : Mar 9, 2025, 9:10:17 PM
-    Author     : Đông
+    Document   : contact
+    Created on : Mar 6, 2025, 1:10:58 PM
+    Author     : Nguyen Duc Anh
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -31,7 +31,7 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2>Manage <b>Account</b></h2>
+                            <h2>Manage <b>Order</b></h2>
                         </div>
 <!--                        <div class="col-sm-6">
                             <a href=""  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Account</span></a>
@@ -50,14 +50,13 @@
                             </th>
                             <th>ID</th>
                             <th>Username</th>
-                            <th>Password</th>
-                            <th>Status</th>
-                            <th>Role</th>
+                            <th>Status Name</th>
+                            <th>Total Money</th>
                             
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${listA}" var="o">
+                        <c:forEach items="${listO}" var="o">
                             <tr>
                                 <td>
                                     <span class="custom-checkbox">
@@ -66,28 +65,13 @@
                                     </span>
                                 </td>
                                 <td>${o.id}</td>
-                                <td>${o.username}</td>
-                                <td>${o.password}</td>
-
+                                <td>${o.fullname}</td>
+                                <td>${o.getStatusID().sName}</td>
+                                <td>${o.totalmoney}</td>
                                 <td>
-                                    <c:choose>
-                                        <c:when test="${o.status == 1}">Online</c:when>
-                                        <c:when test="${o.status == 0}">Banned</c:when>                                        
-                                        <c:otherwise>???</c:otherwise>
-                                    </c:choose>
-                                </td>
-
-                                <td>
-                                    <c:choose>
-                                        <c:when test="${o.roleID == 1}">Admin</c:when>
-                                        <c:when test="${o.roleID == 2}">Seller</c:when>
-                                        <c:when test="${o.roleID == 3}">Customer</c:when>
-                                        <c:otherwise>Unknown</c:otherwise>
-                                    </c:choose>
-                                </td>
-                                <td>
-                                    <a href="deleteAccount?aid=${o.id}&action=edit"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="deleteAccount?aid=${o.id}&action=delete" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                    <a href="loadOrder?oid=${o.id}"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                    <a href="deleteorder?oid=${o.id}&action=delete" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                    <a href="orderdetail?oid=${o.id}"><button type="button" class="btn btn-primary">View</button>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -106,7 +90,7 @@
                     </ul>
                 </div>
             </div>
-            <a href="index.jsp"><button type="button" class="btn btn-primary">Back to home</button>
+            <a href="home"><button type="button" class="btn btn-primary">Back to home</button>
 
         </div>
         <!-- Edit Modal HTML -->
@@ -210,4 +194,5 @@
     <script src="js/manager.js" type="text/javascript"></script>
 </body>
 </html>
+
 

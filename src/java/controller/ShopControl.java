@@ -37,6 +37,10 @@ public class ShopControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String txtSearch = request.getParameter("txt");
         String priceR = request.getParameter("priceR");
+        String indexPage = request.getParameter("index");
+        if (indexPage == null) {
+            indexPage = "1";
+        }
         System.out.println(priceR);
         int minP = 0;
         int maxP = 1000;
@@ -50,11 +54,25 @@ public class ShopControl extends HttpServlet {
             }
         }
         DAO dao = new DAO();
+        int cnt = dao.getTotalProduct();
+        int endPage = cnt / 6;
+        if (cnt % 6 != 0) {
+            endPage++;
+        }
+        
+        int index = Integer.parseInt(indexPage);
+        List<Product> listA = dao.pagingProduct(index);
+        
+         
         List<Product> listP = dao.getProductByPrice(minP, maxP);
         List<Product> list = dao.getAllProduct();
         List<Category> listC = dao.getAllCategory();
         List<Product> listD = dao.searchByName(txtSearch);
-
+        
+        
+        
+        request.setAttribute("ListA", listA);
+        request.setAttribute("EndP", endPage);
         request.setAttribute("listA", list);
         request.setAttribute("listP", listP);
         request.setAttribute("listC", listC);

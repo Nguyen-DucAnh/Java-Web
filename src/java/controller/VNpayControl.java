@@ -64,8 +64,8 @@ public class VNpayControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Lấy số tiền từ request và nhân 100 để phù hợp với VNPay
-        double amount = Double.parseDouble(request.getParameter("amount")) * 100;
+        // Lấy số tiền từ request và nhân 100000 để phù hợp với VNPay
+        double amount = Double.parseDouble(request.getParameter("amount")) * 100000;
         long vnp_Amount = (long) amount; // Ép kiểu về số nguyên 
         String orderId = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 

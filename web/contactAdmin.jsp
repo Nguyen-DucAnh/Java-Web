@@ -1,4 +1,10 @@
 <%-- 
+    Document   : contactAdmin
+    Created on : Mar 24, 2025, 2:43:21 PM
+    Author     : Đông
+--%>
+
+<%-- 
     Document   : account
     Created on : Mar 9, 2025, 9:10:17 PM
     Author     : Đông
@@ -33,64 +39,50 @@
                         <div class="col-sm-6">
                             <h2>Manage <b>Account</b></h2>
                         </div>
-<!--                        <div class="col-sm-6">
-                            <a href=""  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Account</span></a>
-                            <a href="" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
-                        </div>-->
+                        <!--                        <div class="col-sm-6">
+                                                    <a href=""  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Account</span></a>
+                                                    <a href="" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
+                                                </div>-->
                     </div>
                 </div>
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th>
-<!--                                <span class="custom-checkbox">
-                                    <input type="checkbox" id="selectAll">
-                                    <label for="selectAll"></label>
-                                </span>-->
+                                <!--                                <span class="custom-checkbox">
+                                                                    <input type="checkbox" id="selectAll">
+                                                                    <label for="selectAll"></label>
+                                                                </span>-->
                             </th>
                             <th>ID</th>
-                            <th>Username</th>
-                            <th>Password</th>
-                            <th>Status</th>
-                            <th>Role</th>
-                            
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Subject</th>
+                            <th>Message</th>
+
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${listA}" var="o">
-                            <tr>
-                                <td>
-                                    <span class="custom-checkbox">
-                                        <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                        <label for="checkbox1"></label>
-                                    </span>
-                                </td>
-                                <td>${o.id}</td>
-                                <td>${o.username}</td>
-                                <td>${o.password}</td>
+                    <c:forEach items="${listCt}" var="o">
+                        <tr>
+                            <td>
+                                <span class="custom-checkbox">
+                                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
+                                    <label for="checkbox1"></label>
+                                </span>
+                            </td>
+                            <td>${o.id}</td>
+                            <td>${o.name}</td>
+                            <td>${o.email}</td>
+                            <td>${o.sub}</td>
+                            <td>${o.mes}</td>
 
-                                <td>
-                                    <c:choose>
-                                        <c:when test="${o.status == 1}">Online</c:when>
-                                        <c:when test="${o.status == 0}">Banned</c:when>                                        
-                                        <c:otherwise>???</c:otherwise>
-                                    </c:choose>
-                                </td>
-
-                                <td>
-                                    <c:choose>
-                                        <c:when test="${o.roleID == 1}">Admin</c:when>
-                                        <c:when test="${o.roleID == 2}">Seller</c:when>
-                                        <c:when test="${o.roleID == 3}">Customer</c:when>
-                                        <c:otherwise>Unknown</c:otherwise>
-                                    </c:choose>
-                                </td>
-                                <td>
-                                    <a href="deleteAccount?aid=${o.id}&action=edit"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="deleteAccount?aid=${o.id}&action=delete" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                        </c:forEach>
+                            <td>
+                                <a href="#delete?aid=${o.id}&action=edit"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="#delete?aid=${o.id}&action=delete" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            </td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
                 <div class="clearfix">
@@ -210,4 +202,5 @@
     <script src="js/manager.js" type="text/javascript"></script>
 </body>
 </html>
+
 

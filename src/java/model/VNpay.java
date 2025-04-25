@@ -10,7 +10,7 @@ package model;
  */
 public class VNpay {
     public static final String VNPAY_URL = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    public static final String VNP_TMN_CODE = "YOUR_TMN_CODE";
-    public static final String VNP_HASH_SECRET = "YOUR_SECRET_KEY";
-    public static final String RETURN_URL = "http://localhost:8080/WebProject/VnPayReturn";
+    public static final String VNP_TMN_CODE = "XJUWDLQL";
+    public static final String VNP_HASH_SECRET = "0D85P8PC5IEO8TSLMIZKWXI06HAGI3VC";
+    public static final String RETURN_URL = "http://myvnptest.com";
 }

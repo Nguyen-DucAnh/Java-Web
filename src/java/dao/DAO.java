@@ -18,7 +18,12 @@ import model.Product;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Cart;
+import model.Contact;
 import model.Item;
+import model.Order;
+import model.OrderDetail;
+import model.OrderStatus;
+import model.User;
 
 /**
  *
@@ -29,6 +34,7 @@ public class DAO {
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
+    OrderDAO odao = new OrderDAO();
 
     public List<Product> getListProduct() {
         try {
@@ -228,9 +234,9 @@ public class DAO {
 
     public Account getLogin(String username, String password) {
         try {
-            String query = "SELECT * FROM [User]\n"
-                    + "WHERE username = ?\n"
-                    + "AND password = ?";
+            String query = "SELECT * FROM Account\n"
+                    + "WHERE username = ? AND password = ? \n"
+                    + "AND status = 1";
             conn = new DBConnect().getConnection();
             ps = conn.prepareStatement(query);
             ps.setString(1, username);
@@ -249,7 +255,7 @@ public class DAO {
 
     public Account checkAccExist(String username) {
         try {
-            String query = "SELECT * FROM [User]\n"
+            String query = "SELECT * FROM Account\n"
                     + "WHERE username = ?\n";
             conn = new DBConnect().getConnection();
             ps = conn.prepareStatement(query);
@@ -267,7 +273,7 @@ public class DAO {
     }
 
     public void getRegister(String user, String pass) {
-        String query = "INSERT INTO [User]\n"
+        String query = "INSERT INTO Account\n"
                 + "VALUES(?, ?, 1, 3);";
         try {
             conn = new DBConnect().getConnection();
@@ -278,6 +284,201 @@ public class DAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public List<User> getAllUser() {
+        List<User> listU = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM Account";
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+
+                User u = new User(rs.getInt(1),
+                        rs.getString(2), rs.getString(3),
+                        rs.getString(4), rs.getString(5));
+                listU.add(u);
+            }
+            return listU;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public User getUserById(int id) {
+        try {
+            String query = "SELECT * FROM [user]\n"
+                    + "WHERE account_id = ?";
+
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                User u = new User(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5));
+                return u;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Account> getAllAccount() {
+        List<Account> listA = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM Account";
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+
+                Account a = new Account(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getInt(5)
+                );
+                if (rs.getInt(5) != 1) {
+                    listA.add(a);
+                }
+            }
+            return listA;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void unDeleteAccount(String id) {
+        try {
+            String query = "UPDATE Account SET status= 1\n"
+                    + "where id =?";
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteAccount(String id) {
+        try {
+            String query = "UPDATE Account SET status= 0\n"
+                    + "where id =?";
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Account getAccountById(String id) {
+        try {
+            String query = "SELECT * FROM Account\n"
+                    + "WHERE id =?";
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Account a = new Account(rs.getInt(1), rs.getString(2),
+                        rs.getString(3), rs.getInt(4),
+                        rs.getInt(5));
+                return a;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void insertUser(int id, String fname, String lname,
+            String emailD, String phoneD) {
+        String query = "INSERT INTO [user]\n"
+                + "VALUES(?,?,?,?,?);";
+        try {
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.setString(2, fname);
+            ps.setString(3, lname);
+            ps.setString(4, emailD);
+            ps.setString(5, phoneD);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateUser(String fname, String lname,
+            String emailD, String phoneD, int id) {
+        String query = "Update [user]\n"
+                + "set first_name = ?,\n"
+                + "last_name=?,\n"
+                + "email=?,\n"
+                + "phone=?\n"
+                + "WHERE account_id = ?";
+        try {
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, fname);
+            ps.setString(2, lname);
+            ps.setString(3, emailD);
+            ps.setString(4, phoneD);
+            ps.setInt(5, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateAccount(String password, int id) {
+        String query = "Update  Account\n"
+                + "SET password = ?\n"
+                + "WHERE id = ?";
+        try {
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, password);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean checkPassword(int id, String password) {
+        boolean isValid = false;
+        String query = "SELECT * FROM Account WHERE id = ?"
+                + " AND password = ?";
+        try {
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                if (password.equals(rs.getString("password"))) {
+                    isValid = true;
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isValid;
     }
 
     public List<Product> getProductBySellID(int id) {
@@ -398,15 +599,15 @@ public class DAO {
             ps.setDouble(5, cart.getTotalMoney());
             ps.executeUpdate();
             // lay order_id vua insert
-            String sql1 =   "SELECT TOP 1 id FROM Orders ORDER BY id desc";
+            String sql1 = "SELECT TOP 1 id FROM Orders ORDER BY id desc";
             conn = new DBConnect().getConnection();
             ps = conn.prepareStatement(sql1);
             rs = ps.executeQuery();
             // add vao bang Order_Detail
             if (rs.next()) {
                 int oId = rs.getInt("id");
-                for(Item i : cart.getListItems()) {
-                    String sql2 = "INSERT INTO Order_Details"
+                for (Item i : cart.getListItems()) {
+                    String sql2 = "INSERT INTO Order_Details "
                             + "VALUES(?, ?, ?, ?)";
                     conn = new DBConnect().getConnection();
                     ps = conn.prepareStatement(sql2);
@@ -418,7 +619,7 @@ public class DAO {
                 }
             }
             // cap nhat lai so luong san pham
-            String sql3 = "UPDATE Product"
+            String sql3 = "UPDATE Product "
                     + "SET quantity = quantity - ?"
                     + "WHERE id = ?";
             conn = new DBConnect().getConnection();
@@ -428,10 +629,296 @@ public class DAO {
                 ps.setInt(2, i.getProduct().getId());
                 ps.executeUpdate();
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Order> getListOrder() {
+        try {
+            String query = "SELECT * FROM Orders";
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            List<Order> list = new ArrayList<>();
+            while (rs.next()) {
+                int oId = rs.getInt(5);
+                Order o = new Order(rs.getInt(1), rs.getInt(2), rs.getString(3),
+                        rs.getString(4), odao.getOrderStatusById(rs.getInt(5)), rs.getDouble(6));
+                list.add(o);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public OrderStatus getOrderStatusById(int id) {
+        try {
+            String query = "SELECT * FROM Order_Status\n"
+                    + "WHERE id = ?";
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                OrderStatus o = new OrderStatus(rs.getInt(1), rs.getString(2));
+                return o;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Order> getOrderByStId(int id) {
+        try {
+            String query = "SELECT * FROM Orders\n"
+                    + "WHERE status_id = ?";
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            List<Order> list = new ArrayList<>();
+            while (rs.next()) {
+                int oId = rs.getInt(5);
+
+                Order o = new Order(rs.getInt(1), rs.getInt(2), rs.getString(3),
+                        rs.getString(4), odao.getOrderStatusById(rs.getInt(5)), rs.getDouble(6));
+                list.add(o);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void updateOrderStatus(String sid, String id) {
+        try {
+            String query = "Update Orders\n"
+                    + "SET status_id = ?\n"
+                    + "WHERE id = ?";
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, sid);
+            ps.setString(2, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Order> getOrderByUseId(int id) {
+        try {
+            String query = "SELECT * FROM Orders\n"
+                    + "WHERE user_id = ?\n"
+                    + "ORDER BY id desc";
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            List<Order> list = new ArrayList<>();
+            while (rs.next()) {
+                int oId = rs.getInt(5);
+                Order o = new Order(rs.getInt(1), rs.getInt(2), rs.getString(3),
+                        rs.getString(4), odao.getOrderStatusById(rs.getInt(5)), rs.getDouble(6));
+                list.add(o);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Order getOrderById(String id) {
+        try {
+            String query = "SELECT * FROM Orders\n"
+                    + "WHERE id = ?";
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int oId = rs.getInt(5);
+                Order o = new Order(rs.getInt(1), rs.getInt(2), rs.getString(3),
+                        rs.getString(4), odao.getOrderStatusById(rs.getInt(5)), rs.getDouble(6));
+                return o;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void deleteOrderByID(String id) {
+        try {
+            String query = "DELETE FROM Orders WHERE id = ?";
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Contact> getAllContact() {
+        List<Contact> listCt = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM Contact";
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Contact c = new Contact(rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getInt(1),
+                        rs.getInt(2));
+                listCt.add(c);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listCt;
+    }
+
+    public void insertConact(int id, String name, String email, String sub, String mes) {
+        String query = "INSERT INTO Contact\n"
+                + "VALUES(?,?,?,?,?);";
+        try {
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.setString(2, name);
+            ps.setString(3, email);
+            ps.setString(4, sub);
+            ps.setString(5, mes);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<OrderStatus> getListOrStatus() {
+        try {
+            String query = "SELECT * FROM Order_Status";
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            List<OrderStatus> list = new ArrayList<>();
+            while (rs.next()) {
+                OrderStatus o = new OrderStatus(rs.getInt(1), rs.getString(2));
+                list.add(o);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<OrderDetail> getOrderDetail(String oid) {
+        try {
+            String query = "SELECT od.id AS order_detail_id, \n"
+                    + "       od.order_id, \n"
+                    + "       od.product_id,  \n"
+                    + "       od.price, \n"
+                    + "       od.num,\n"
+                    + "	   p.product_name,\n"
+                    + "       a.username\n"
+                    + "FROM Order_Details od\n"
+                    + "JOIN Product p ON od.product_id = p.id\n"
+                    + "JOIN Orders o ON od.order_id = o.id\n"
+                    + "JOIN Account a ON o.user_id = a.id\n"
+                    + "WHERE od.order_id = ?;";
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, oid);
+            rs = ps.executeQuery();
+            List<OrderDetail> list = new ArrayList<>();
+            while (rs.next()) {
+                OrderDetail o = new OrderDetail(rs.getInt(1), rs.getInt(2), rs.getInt(3),
+                        rs.getDouble(4), rs.getInt(5), rs.getString(6), rs.getString(7));
+                list.add(o);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public int getTotalProduct() {
+        String query = "SELECT COUNT(*) FROM Product";
+        try {
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+
+        }
+        return 0;
+    }
+
+    public List<Product> pagingProduct(int index) {
+        try {
+            String query = "SELECT * FROM Product\n"
+                    + "ORDER BY id\n"
+                    + "OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY;";
+            conn = new DBConnect().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, (index-1) * 6);
+            rs = ps.executeQuery();
+            List<Product> list = new ArrayList<>();
+            while(rs.next()) {
+                Product a = new Product(rs.getInt(1), rs.getString(2), rs.getString(3),
+                        rs.getDouble(4), rs.getString(5), rs.getString(6),
+                        rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getInt(10));
+                list.add(a);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public String getResponse(String message) {
+        String response = "Tôi chưa biết câu này. Bạn có thể dạy tôi không?";
+        try {
+            ps = conn.prepareStatement("SELECT answer FROM Chat WHERE question = ?");
+            ps.setString(1, message);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                response = rs.getString("answer");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    public boolean addNewResponse(String question, String answer) {
+        try {
+            ps = conn.prepareStatement("INSERT INTO Chat (question, answer) VALUES (?, ?)");
+            ps.setString(1, question);
+            ps.setString(2, answer);
+            int rowsInserted = ps.executeUpdate();
+            return rowsInserted > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }

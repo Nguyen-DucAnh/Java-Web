@@ -73,7 +73,7 @@
                                         <a href="checkout" class="dropdown-item">Checkout</a>
                                     </div>
                                 </div>
-                                <a href="contact" class="nav-item nav-link">Contact</a>
+                                <a href="contact.jsp" class="nav-item nav-link">Contact</a>
                             </div>
                             <div class="navbar-nav ml-auto py-0">
                                 <c:if test="${sessionScope.acc == null}">
@@ -85,12 +85,14 @@
                                             ${sessionScope.acc.username}
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="userDropdown">
-                                            <a class="dropdown-item" href="#">Profile</a>
+                                            <a class="dropdown-item" href="profilecontrol">Profile</a>
                                             <c:if test="${sessionScope.acc.roleID == 2}">
-                                            <a class="dropdown-item" href="managerprd">Manager Product</a>
+                                                <a class="dropdown-item" href="managerprd">Manager Product</a>
                                             </c:if>
                                             <c:if test="${sessionScope.acc.roleID == 1}">
-                                            <a class="dropdown-item" href="#">Manager Account</a>
+                                                <a class="dropdown-item" href="accountcontrol">Manager Account</a>
+                                                <a class="dropdown-item" href="managerorder">Manager Order</a>
+                                                <a class="dropdown-item" href="contactadmin">Manager Contact</a>
                                             </c:if>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="logout">Logout</a>
@@ -263,7 +265,87 @@
             </div>
         </div>
         <!-- Subscribe End -->
+        <style>
+            #chat-container {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 300px;
+                background: white;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                overflow: hidden;
+                font-family: Arial, sans-serif;
+            }
+            #chat-header {
+                background: blue;
+                color: white;
+                text-align: center;
+                padding: 10px;
+                font-weight: bold;
+            }
+            #chat-messages {
+                height: 300px;
+                overflow-y: auto;
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+            }
+            #chat-input {
+                display: flex;
+                padding: 5px;
+            }
+            #chat-input input {
+                flex: 1;
+                padding: 8px;
+                border: none;
+                border-radius: 5px;
+                outline: none;
+            }
+            #chat-input button {
+                background: blue;
+                color: white;
+                border: none;
+                padding: 8px 15px;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+        </style>
+        <h1>Welcome to Home Page</h1>
 
+        <!-- Chatbot -->
+        <div id="chat-container">
+            <div id="chat-header">Chatbot AI 🤖</div>
+            <div id="chat-messages"></div>
+            <div id="chat-input">
+                <input type="text" id="message" placeholder="Nhập tin nhắn..." onkeypress="checkEnter(event)">
+                <button onclick="sendMessage()">Gửi</button>
+            </div>
+        </div>
+
+        <script>
+            function checkEnter(event) {
+                if (event.key === "Enter") {
+                    sendMessage();
+                }
+            }
+
+            function sendMessage() {
+                let userInput = document.getElementById("message").value; // Sửa đúng ID
+                console.log("Sending message:", userInput); // Kiểm tra có lấy được tin nhắn không
+
+                fetch("chat?message=" + encodeURIComponent(userInput))
+                        .then(response => response.text())
+                        .then(data => {
+                            console.log("Response from server:", data); // Kiểm tra phản hồi từ Servlet
+                            let chatBox = document.getElementById("chat-messages"); // Sửa đúng ID
+                            chatBox.innerHTML += "<p><b>Bạn:</b> " + userInput + "</p>";
+                            chatBox.innerHTML += "<p><b>Bot:</b> " + data + "</p>";
+                            
+                            document.getElementById("message").value = "";
+                        })
+                        .catch(error => console.error("Error:", error));
+            }
+        </script>
 
         <!-- Products Start -->
         <div class="container-fluid pt-5">
@@ -292,13 +374,11 @@
                 </c:forEach>
             </div>
         </div>
-        <!-- Products End -->
-
 
 
         <jsp:include page="footer.jsp"></jsp:include>
         <!-- Back to Top -->
-        <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
 
 
         <!-- JavaScript Libraries -->

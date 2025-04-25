@@ -5,6 +5,7 @@
 
 package controller;
 
+import dao.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,8 +18,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Nguyen Duc Anh
  */
-@WebServlet(name="VNpayReturnControl", urlPatterns={"/VNpayReturn"})
-public class VNpayReturnControl extends HttpServlet {
+@WebServlet(name="EditOrderControl", urlPatterns={"/editOrder"})
+public class EditOrderControl extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -30,18 +31,18 @@ public class VNpayReturnControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet VNpayReturnControl</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet VNpayReturnControl at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        String oid = request.getParameter("id");
+        String username = request.getParameter("username");
+        String statusId = request.getParameter("statusId");
+        String totalmoney = request.getParameter("totalmoney");
+        String statusname = request.getParameter("statusName");
+        System.out.println("" + oid);
+        System.out.println("" + statusId);
+        System.out.println("" + statusname);
+        DAO dao = new DAO();
+        dao.updateOrderStatus(statusId, oid);
+        response.sendRedirect("managerorder");
+        
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -55,16 +56,7 @@ public class VNpayReturnControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String responseCode = request.getParameter("vnp_ResponseCode");
-        String orderId = request.getParameter("vnp_TxnRef");
-        String amount = request.getParameter("vnp_Amount");
-
-        request.setAttribute("orderId", orderId);
-        request.setAttribute("amount", amount);
-        request.setAttribute("status", "00".equals(responseCode) ? "Thành công" : "Thất bại");
-
-        request.getRequestDispatcher("index.jsp").forward(request, response);
-    
+        processRequest(request, response);
     } 
 
     /** 
